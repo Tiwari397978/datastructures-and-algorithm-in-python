@@ -1,0 +1,189 @@
+# Please check off the following topics to confirm that you already understand them! You're only expected to understand the basics of how to manipulate them—details about usage will be explained later if needed. If anything looks unfamiliar, you can check out one of our introductory Python classes. This course will also default to Python 2 where applicable, though it's very similar to Python 3!
+
+Comments
+# This is a one-line Python comment - code blocks are so useful!
+"""This type of comment is used to document the purpose of functions and classes."""
+
+Declaration/Initialization
+# Remember values, not variables, have data types.
+# A variable can be reassigned to contain a different data type.
+answer = 42
+answer = "The answer is 42."
+
+Data Types
+boolean = True
+number = 1.1
+string = "Strings can be declared with single or double quotes."
+list = ["Lists can have", 1, 2, 3, 4, "or more types together!"]
+tuple = ("Tuples", "can have", "more than", 2, "elements!")
+dictionary = {'one': 1, 'two': 2, 'three': 3}
+variable_with_zero_data = None
+
+Simple Logging
+print "Printed!"
+
+Conditionals
+if cake == "delicious":
+    return "Yes please!"
+elif cake == "okay":
+    return "I'll have a small piece."
+else:
+    return "No, thank you."
+
+Loops
+for item in list:
+    print item
+
+while (total < max_val):
+    total += values[i]
+    i += 2
+
+Functions
+def divide(dividend, divisor):
+    quotient = dividend / divisor
+    remainder = dividend % divisor
+    return quotient, remainder
+
+
+def calculate_stuff(x, y):
+    (q, r) = divide(x,y)
+    print q, r
+
+
+Classes
+class Person(object):
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age 
+
+    def birthday(self):
+        self.age += 1
+
+# You shouldn't need to run Python code outside the classroom, so don't worry if you don't have a development environment set up!
+
+# Start Quiz   
+
+"""You can use this class to represent how classy someone
+or something is.
+"Classy" is interchangable with "fancy".
+If you add fancy-looking items, you will increase
+your "classiness".
+Create a function in "Classy" that takes a string as
+input and adds it to the "items" list.
+Another method should calculate the "classiness"
+value based on the items.
+The following items have classiness points associated
+with them:
+"tophat" = 2
+"bowtie" = 4
+"monocle" = 5
+Everything else has 0 points.
+Use the test cases below to guide you!"""
+
+class Classy(object):
+    def __init__(self):
+        self.items = []
+
+# Test cases
+me = Classy()
+
+# Should be 0
+print me.getClassiness()
+
+me.addItem("tophat")
+# Should be 2
+print me.getClassiness()
+
+me.addItem("bowtie")
+me.addItem("jacket")
+me.addItem("monocle")
+# Should be 11
+print me.getClassiness()
+
+me.addItem("bowtie")
+# Should be 15
+print me.getClassiness()
+
+# Answer
+class Classy(object):
+    def __init__(self):
+        self.items = []
+
+    def addItem(self, item):
+        self.items.append(item)
+
+    def getClassiness(self):
+        classiness = 0
+        if len(self.items) > 0:
+            for item in self.items:
+                if item == "tophat":
+                    classiness += 2
+                elif item == "bowtie":
+                    classiness += 4
+                elif item == "monocle":
+                    classiness += 5
+        return classiness
+
+# Basic Python
+# quiz2
+
+# Write a function called "show_excitement" where the string
+# "I am super excited for this course!" is returned exactly
+# 5 times, where each sentence is separated by a single space.
+# Return the string with "return".
+# You can only have the string once in your code.
+# Don't just copy/paste it 5 times into a single variable!
+
+
+def show_excitement():
+    # Your code goes here!
+    return ""
+
+print show_excitement()
+
+# Ans
+If you thought that quiz was really hard, you likely won't be able to understand the coding examples ahead. The videos are all language agnostic, meaning you don't need to know about a particular coding language to understand them, so you should still be able to watch the videos!
+# Efficiency practice
+# quiz
+# Below are some examples of functions in Python. Look at each and take note of the time efficiency. Then, in the quiz, enter those values using the correct notation. Use approximations wherever possible!
+"""input manatees: a list of "manatees", where one manatee is represented by a dictionary
+a single manatee has properties like "name", "age", et cetera
+n = the number of elements in "manatees"
+m = the number of properties per "manatee" (i.e. the number of keys in a manatee dictionary)"""
+
+def example1(manatees):
+    for manatee in manatees:
+        print manatee['name']
+
+def example2(manatees):
+    print manatees[0]['name']
+    print manatees[0]['age']
+
+def example3(manatees):
+    for manatee in manatees:
+        for manatee_property in manatee:
+            print manatee_property, ": ", manatee[manatee_property]
+
+def example4(manatees):
+    oldest_manatee = "No manatees here!"
+    for manatee1 in manatees:
+        for manatee2 in manatees:
+            if manatee1['age'] < manatee2['age']:
+                oldest_manatee = manatee2['name']
+            else:
+                oldest_manatee = manatee1['name']
+    print oldest_manatee
+# Ans
+Example 1
+We iterate over every manatee in the manatees list with the for loop. Since we're given that manatees has n elements, our code will take approximately O(n) time to run.
+
+Example 2
+We look at two specific properties of a specific manatee. We aren't iterating over anything - just doing constant-time lookups on lists and dictionaries. Thus the code will complete in constant, or O(1), time.
+
+Example 3
+There are two for loops, and nested for loops are a good sign that you need to multiply two runtimes. Here, for every manatee, we check every property. If we had 4 manatees, each with 5 properties, then we would need 5+5+5+5 steps. This logic simplifies to the number of manatees times the number of properties, or O(nm).
+
+Example 4
+Again we have nested for loops. This time we're iterating over the manatees list twice - every time we see a manatee, we compare it to every other manatee's age. We end up with O(nn), or O(n^2) (which is read as "n squared").
+
+Throughout the course, you can reference the Big-O Cheat Sheet(https://www.bigocheatsheet.com/) to keep track of time complexities for many of the algorithms and data structures we study.
